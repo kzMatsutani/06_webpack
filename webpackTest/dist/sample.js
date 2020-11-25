@@ -1,0 +1,2 @@
+!function(){"use strict";console.log("Hello World!!!!")}();
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly93ZWJwYWNrdGVzdC8uL3NyYy9jb21wb25lbnQvdGVzdC5qcyJdLCJuYW1lcyI6WyJjb25zb2xlIiwibG9nIl0sIm1hcHBpbmdzIjoieUJBQ0lBLFFBQVFDLElBQUksbUIiLCJmaWxlIjoic2FtcGxlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZnVuY3Rpb24gdGVzdCgpIHtcbiAgICBjb25zb2xlLmxvZygnSGVsbG8gV29ybGQhISEhJyk7XG59XG5leHBvcnQgeyB0ZXN0IH0iXSwic291cmNlUm9vdCI6IiJ9
