@@ -6,19 +6,28 @@
     <title>async</title>
 </head>
 <body>
-    <div id="aaa"></div>
+    <div id="aaa">
+        <p class="news">
+            <ul>
+                <li id="id"></li>
+                <li id="title"></li>
+                <li id="body"></li>
+            </ul>
+        </p>
+    </div>
     <script>
-        async function  api () {
+        async function api() {
             const post = await fetch('https://jsonplaceholder.typicode.com/posts');
             const data = await post.json();
             document.getElementById('aaa');
-            data.forEach(function(value) {
+            data.forEach(function (value) {
                 console.log(value.id);
                 console.log(value.title);
                 console.log(value.body);
             });
         };
         api();
+        console.log('test');
     </script>
 </body>
 </html>
