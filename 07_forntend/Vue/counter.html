@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h2>累乗: {{ state.double }} {{ state.multiple}}</h2>
+        <button v-on:click="increment">加算 {{ state.count }}</button>
+        <button v-on:click="decrement">減産 {{ state.count }}</button>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    Vue.createApp({
+        setup() {
+            const message = Vue.ref('Counter App');
+            const state = Vue.reactive({
+                count: 0,
+                double: Vue.computed(() => Math.pow(state.count, 2)),
+                // multiple: (this.state.count % 3) == 0 ? ':３の倍数です' : '',
+                // multiple: ':３の倍数です',
+            });
+            const increment = () => { state.count++ };
+            const decrement = () => { state.count-- };
+
+            return {message, state, increment, decrement};
+        }
+    }).mount('#app');
+  </script>
+</body>
+</html>

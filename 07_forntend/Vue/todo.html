@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Todo</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .done {
+            opacity: .3;
+            text-decoration: line-through;
+        }
+        .edit {
+            display: none;
+        }
+        .editing .edit {
+            display: inline;
+        }
+    </style>
+</head>
+<body class="h-full">
+    <div id="app" class="py-40 bg-gray-100 h-full">
+        <div class="max-w-2xl mx-auto bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">{{ state.title }}</h3>
+                <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">Build a Todo List App with VueJS.</p>
+            </div>
+            <div>
+                <dl>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-col-auto sm:px-6">
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span class="inline-flex items-center px-10 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> Todo </span>
+                            <input id="company_website" class="p-4 border border-gray-300 form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="state.newTitle" @keyup.enter="addTodo" autofocus placeholder="Todo title">
+                        </div>
+                    </div>
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-9 sm:gap-4 sm:px-6" v-for="todo in state.todos" :class="{done: todo.completed, editing: todo === state.editObj}" :key="todo.id">
+                        <dt class="text-sm pl-10 mt-1 leading-5 font-medium text-gray-500 sm:col-span-3"> {{todo.id}} <input type="checkbox" v-model="todo.completed" class="form-checkbox h-4 w-4 ml-4 text-indigo-600 transition duration-150 ease-in-out">
+                        </dt>
+                        <dd class="mt-1 text-2xl leading-5 text-gray-900 sm:mt-0 sm:col-span-4">
+                            <label @dblclick="editTodo(todo)">{{todo.title}}</label>
+                            <input v-model="state.editTitle" @keyup.enter="updateTodo(todo)" class="edit mt-1 ml-4 p-2 border border-gray-300 form-input w-auto transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        </dd>
+                        <dd class="sm:mt-0 sm:col-span-2">
+                            <button @click="deleteTodo(todo)" class="inline-flex justify-center ml-2 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <svg class="w-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg> Delete </button>
+                        </dd>
+                    </div>
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                        <dt class="text-sm mt-1 leading-5 font-medium text-gray-500 px-6 py-2"> 登録件数 </dt>
+                        <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-3">
+                            <ul class="border border-gray-200 rounded-md">
+                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
+                                    <div class="w-0 flex-1 flex items-center">
+                                        <!-- Heroicon name: paper-clip -->
+                                        <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                        </svg>
+                                        <div v-if="existsTodo()">
+                                            <span class="ml-2 flex-1 w-0 truncate">{{ todoCount() }} </span>件 </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    Vue.createApp({
+        setup() {
+            const state = Vue.reactive({
+                title: 'CRUD Todo',
+                newTitle: '',
+                todos: [],
+                editObj: null,
+                editTitle: ''
+            });
+            const addTodo = () => {
+                if (!state.todos) return;
+                state.todos.push({
+                    id: (new Date()).getTime().toString().slice(-4),
+                    title: state.newTitle,
+                    completed: false
+                });
+                console.log(state.todos);
+                state.newTitle = '';
+            }
+
+            const editTodo = (todo) => {
+                state.editObj = todo;
+                state.editTitle = todo.title
+            }
+
+            const updateTodo = (todo) => {
+                todo.title = state.editTitle;
+                state.editObj = null;
+                state.editTitle = '';
+            }
+
+            const deleteTodo = (todo) => {
+                const delIndex = state.todos.indexOf(todo);
+                state.todos.splice(delIndex, 1);
+            }
+            const existsTodo = () => {
+                return state.todos.length > 0;
+            }
+            const todoCount = () => {
+                return state.todos.length.toString();
+            }
+
+            return { state, addTodo, deleteTodo, editTodo, updateTodo, existsTodo, todoCount };
+        }
+    }).mount('#app');
+</script>
+</html>

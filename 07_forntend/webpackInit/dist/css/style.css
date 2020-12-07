@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/** パーシャルの読み込み **/
+/* MediaQueryの宣言をミックスインで定義 */
+h1 {
+  color: red;
+  /* MediaQueryの宣言だけを展開 */ }
+  h1:hover {
+    color: blue; }
+  @media screen and (max-width: 768px) {
+    h1 {
+      /* include内を読み込み */
+      color: green; }
+      h1:active {
+        color: pink; } }
+
