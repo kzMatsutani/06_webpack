@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/tasks', 'TasksController@index');
 Route::post('/tasks', 'TasksController@store');
-Route::get('/tasks/{task}', 'TaskController@show');
-Route::put('/tasks/{task}', 'TaskController@update');
-Route::delete('/tasks/{task}', 'TaskController@destroy');
+Route::get('/tasks/{task}', 'TasksController@show');
+Route::put('/tasks/{task}', 'TasksController@update');
+Route::delete('/tasks/{task}', 'TasksController@destroy');
