@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/tasks', 'TasksController@index');
+Route::post('/tasks', 'TasksController@store');
+Route::get('/tasks/{task}', 'TaskController@show');
+Route::put('/tasks/{task}', 'TaskController@update');
+Route::delete('/tasks/{task}', 'TaskController@destroy');
