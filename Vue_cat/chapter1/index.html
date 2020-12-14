@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+    <div id="app">
+        <!-- P38 -->
+        <p> {{message }} </p>
+        <!-- P39 -->
+        <ol>
+            <li v-for="item in list">{{ item }}</li>
+        </ol>
+        <!-- P40 -->
+        <button v-on:click="handleClick">Click</button>
+        <p>{{ msg }}</p>
+        <input v-model="msg">
+        <!-- P41 -->
+        <p>{{ number }}</p>
+        <input v-model.number="number">
+        <p v-if="show">Hello Vue.js!</p>
+        <p>
+            <button v-on:click="ifBool">反転</button>
+        </p>
+        <!-- P42 -->
+        <button v-on:click="display=!display">切り替え</button>
+        <transition>
+            <p v-if="display">Hi Vue.js!</p>
+        </transition>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="./main.js"></script>
+</html>
