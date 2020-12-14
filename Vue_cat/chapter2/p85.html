@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./p85.css" />
+</head>
+<body>
+    <div id="app" v-cloak>
+        <p ref="hello">Hello</p>
+        <button v-on:click="handleClick()">カウントアップ</button>
+        <button v-on:click="show = !show">表示/非表示</button>
+        <span ref="count" v-if="show">0</span>
+        <!-- p88 -->
+        <div>
+            <a v-bind:href="url" v-pre>
+                Hello {{ message }}
+            </a>
+        </div>
+        <!-- p89 -->
+        <div>
+            <a v-bind:href="url" v-once>
+                Hello {{ message }}
+            </a>
+        </div>
+        <div>
+            <span v-text="message"></span>
+        </div>
+        <!-- p90 -->
+        <div>
+            <span v-html="text"></span>
+        </div>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+<script src="./p85.js"></script>
+</html>

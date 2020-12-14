@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+    <div id="app">
+        <div>
+            名前<input v-model="name">
+            <button v-on:click="doAdd">追加</button>
+            <ul>
+                <li v-for="(item, index) in list" v-bind:key="item.id" v-if="item.hp">
+                    ID: {{item.id}} {{ item.name }} - HP {{ item.hp}}
+                    <span v-if="item.hp < 50">瀕死!</span>
+                    <button v-on:click="doAttack(index)">攻撃する</button>
+                    <button v-on:click="doRemove(index)">削除</button>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+<script src="./main2.js"></script>
+</html>
