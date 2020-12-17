@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+    <div id="app">
+        <header v-bind:class="{ compact: scrollY > 200}"></header>
+        200pxより下にスクロールしたら ,compactを付与
+        <div class="height"></div>
+        <div v-on:click="scrollTop">丈夫に移動</div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@12.1.5"></script>
+<script src="./p115.js"></script>
+</html>

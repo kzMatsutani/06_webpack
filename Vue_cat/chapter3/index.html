@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+    <div id="app">
+        <!-- p99 -->
+        <div>
+            <p>{{ message }}</p>
+            <input v-bind:value="message" v-on:input="handleInput">
+        </div>
+        <!-- p100 -->
+        <div v-on:click.right="handler">example</div>
+        <div v-on:click.right.prevent="handler">example</div>
+        <strong> .stop</strong>
+        <div v-on:click="handler('div1')"> div1 <a href="#top" v-on:click.stop="handler('div2')">div2</a>
+        </div>
+        <strong> .prevent</strong>
+        <div v-on:click="handler('div1')"> div1
+            <a href="#top" v-on:click.prevent="handler('div2')">div2</a>
+        </div>
+        <strong> .capture</strong>
+        <div v-on:click.capture="handler('div1')"> div1
+            <div v-on:click="handler('div2')"> div2
+                <div v-on:click="handler('div3')"> div3</div>
+            </div>
+        </div>
+        <!-- p108 -->
+        <div>
+            <input type="checkbox" v-model="val">{{ val }}
+            <input type="checkbox" v-model="val2" true-value="yes" false-value="no">{{ val2 }}
+        </div>
+        <!-- p109 -->
+        <div>
+            <label><input type="checkbox" v-model="val3" value="A">A</label>
+            <label><input type="checkbox" v-model="val3" value="B">B</label>
+            <label><input type="checkbox" v-model="val3" value="C">C</label>
+        </div>
+        <div>
+            <label><input type="radio" v-model="val4" value="A">A</label>
+            <label><input type="radio" v-model="val4" value="B">B</label>
+            <label><input type="radio" v-model="val4" value="C">C</label>
+            {{ val4 }}
+        </div>
+        <!-- p112 -->
+        <div>
+            <input type="file" v-on:change="handleChange">
+            <div v-if="preview"><img v-bind:src="preview" alt=""></div>
+        </div>
+        <div>
+            <input type="text" v-model.number="price">{{ price }}
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+<script src="./main.js"></script>
+</html>

@@ -199,3 +199,73 @@ v-cloak
 v-cloak中は非表示にしたりLoading等の表示にしておく。
 
 
+chapter3
+
+p96
+@click="handleClick($event, item)
+イベントオブジェクトまたはカスタムイベントの引数を$eventという変数名で使用できる
+イベントオブジェクトの意味がわからず。
+調べた結果上述のコードの場合はclickイベントに関しての情報をhandleClickメソッド内で展開出来るようになる
+
+
+p98
+通常inputなどはv-modelを使用すればdataプロパティと直結して反映できるが
+あえてv-on:input等を使用すれば一度メソッドを通してからdataプロパティの更新が可能となる。
+
+p100
+.stop
+イベントバブリングの停止
+div v-on:click　の中にさらにv-on:clickが存在していた場合中をクリックした場合外(親)のイベントも一緒に発火してしまう
+.stopを中(子)に設定すれば、子でイベント発火が止まる。
+
+.prevent
+発火はするがsubmitやリンク遷移等の処理のキャンセルを行う。
+
+.capture
+親に設定する修飾子で子が発火されたときでも、.captureがついている親から先に発火される。
+
+
+p105
+v-model
+双方向バインディングを可能とするディレクティブ
+瞬時に同期が可能になるが、日本語の場合に瞬時に同期させてい場合はv-on:inputのほうがいい。
+
+p108
+textareaはマスタッシュ構文が使用できないのでv-model又はV-bind:valueを使用する
+
+単一要素のcheckboxの判定はtrue,falseで行われる。v-model="bool"
+初期値がbool: trueの場合はすでにチェックが入っていることになり、チェックが外されるとfalseになる。
+単一要素でも文字列判定を入れる場合はtrue-value, false-valueを設定する必要がある。
+
+複数要素のcheckboxはv-model="val"この対象は同一でvalには空の配列を用意しておくことで
+空の配列内に選択したcheckboxのvalueが収められる
+
+radioボタンの値は文字列
+
+selectboxは単一選択であれば文字列、複数選択できるならば空配列。
+
+
+chapter4
+
+p120
+computed　算出プロパティ
+処理を行った後のプロパティとして定義される。
+{{ halfWidth }}でtemplateから使用可能
+this.halfWidthでメソッドから使用可能。
+
+p122
+算出プロパティは基本的に元のデータに影響を与えず、プロパティに値を代入しようとしてもエラーとなる。
+しかしcomputed関数にgetで取得した後にsetを定義すればdataプロパティに代入することができる。
+halfWidth: {
+            get: function () {
+                return this.width / 2;
+            },
+            set: function (val) {
+                this.width = val * 2
+            }
+        },
+
+p123
+大きな特徴として算出プロパティはリアクティブな依存データに基づき結果をキャッシュする
+Math.random()を返すcomputedがあったとして、何度行ってもリアクティブなデータが絡まない限り同じ結果が返ってくる。
+methodsではその計算を毎回行うため、結果は変わる。
