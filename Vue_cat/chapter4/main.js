@@ -6,6 +6,8 @@ new Vue({
         budget: 200,
         limit: 2,
         order: false,
+        num: 1,
+        numWatch: false,
         list: [
             { id: 1, name: 'りんご' , price: 100},
             { id: 2, name: 'バナナ' , price: 200},
@@ -46,6 +48,23 @@ new Vue({
         limited: function () {
             return this.sorted.slice(0,this.limit)
         }
+    },
+    watch: {
+        num: {
+            handler: function (newval, oldval) {
+                this.numWatch = true
+                console.log(newval, oldval)
+            },
+            deep: true,
+            immediate: true
+        }
+    },
+    created: function () {
+        this.$watch(function () {
+            return Object.assign('', this.num)
+        }, function (newval, oldval) {
+                console.log(newval.length, oldval.lenght)
+        })
     },
     methods: {
         methodsData: function () {

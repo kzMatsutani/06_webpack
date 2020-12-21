@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+    <div id="app">
+        <div>
+            {{ price | localNum }}円
+        </div>
+        <div>
+            {{ message | filter(foo, 100) }}
+        </div>
+        <div>
+            180度は{{ 180 | radian | rounds }}ラジアンです
+        </div>
+        <div>
+            {{price | tax1 | localNum}}
+        </div>
+        <div>
+            {{price | tax8 | localNum}}
+        </div>
+        <!-- p137 -->
+        <div c-directive>example
+            <input v-focus>
+        </div>
+        <!-- p143 -->
+        <button v-on:click="list.push(list.length+1)">追加</button>
+        <ul ref="list">
+            <li v-for="item in list"> {{item }}</li>
+        </ul>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+<script src="./p134
+.js"></script>
+</html>

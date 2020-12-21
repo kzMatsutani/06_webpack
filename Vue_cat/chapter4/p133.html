@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+    <div id="app">
+        <div v-test>
+            <select v-model="current">
+                <option v-for="topic in topics" v-bind:key="topic.value"> {{ topic.name }} </option>
+            </select>
+            <div v-for="item in list"> <input v-model="message" v-bind:key="item.id">{{item.full_name }}</div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+<script src="./p133.js"></script>
+</html>

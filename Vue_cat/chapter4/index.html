@@ -37,6 +37,10 @@
                 </li>
             </ul>
         </div>
+        <div>
+            <input v-model.number="num"> {{ num }}
+            <p v-if="order">数値の変更が確認されました</p>
+        </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
